@@ -113,10 +113,19 @@
     var grid = document.getElementById("hundredGrid");
     if (!grid) return;
 
-    var KEY = "haodao-guanxi-100days";
+    var KEY = "haodao-culture:guan-huxi:hundred-days:v1";
+    // 從舊 key 遷移既有紀錄（若有）
+    try {
+      var legacy = localStorage.getItem("haodao-guanxi-100days");
+      if (legacy && !localStorage.getItem(KEY)) {
+        localStorage.setItem(KEY, legacy);
+        localStorage.removeItem("haodao-guanxi-100days");
+      }
+    } catch (e) { /* ignore */ }
     var countEl = document.getElementById("dayCount");
     var streakEl = document.getElementById("dayStreak");
     var markBtn = document.getElementById("markToday");
+    var undoBtn = document.getElementById("undoToday");
     var resetBtn = document.getElementById("trackerReset");
 
     function load() {
@@ -163,16 +172,28 @@
       var done = dates.indexOf(today()) >= 0;
       markBtn.textContent = done ? "今天已打卡 ✓" : "完成一次・打卡";
       markBtn.classList.toggle("is-done", done);
+      markBtn.disabled = done;
+      if (undoBtn) undoBtn.hidden = !done;
     }
 
     markBtn.addEventListener("click", function () {
       var dates = load();
       var t = today();
-      var idx = dates.indexOf(t);
-      if (idx >= 0) dates.splice(idx, 1); else dates.push(t);
-      save(dates);
-      render();
+      if (dates.indexOf(t) < 0) {
+        dates.push(t);
+        save(dates);
+        render();
+      }
     });
+
+    if (undoBtn) {
+      undoBtn.addEventListener("click", function () {
+        if (!window.confirm("取消今天的打卡紀錄？")) return;
+        var dates = load();
+        var i = dates.indexOf(today());
+        if (i >= 0) { dates.splice(i, 1); save(dates); render(); }
+      });
+    }
 
     resetBtn.addEventListener("click", function () {
       if (window.confirm("確定要清除百日打卡紀錄嗎？此動作無法復原。")) {
@@ -189,7 +210,7 @@
     var main = document.querySelector("main.chapter");
     if (!main) return;
 
-    var KEY = "guanxi-last-read";
+    var KEY = "haodao-culture:guan-huxi:last-read:v1";
     var file = location.pathname.split("/").pop() || "index.html";
     var h1 = document.querySelector(".chapter-head h1");
     var title = h1 ? h1.textContent.trim() : document.title;
@@ -244,17 +265,27 @@
 
   /* ---------------- 著陸頁：接續閱讀 + 每日一句 ---------------- */
   (function initLanding() {
-    var KEY = "guanxi-last-read";
+    var KEY = "haodao-culture:guan-huxi:last-read:v1";
 
-    // 接續閱讀
+    // 接續閱讀（資料取自 localStorage，同 origin 下可能被其他 Pages 寫入，故嚴格驗證並以 DOM API 寫入）
+    var CH = /^ch(0[1-9]|1[01])\.html$/;
     var resumeEl = document.getElementById("resumeReading");
     if (resumeEl) {
       try {
         var saved = JSON.parse(localStorage.getItem(KEY));
-        if (saved && saved.file) {
-          var label = saved.num ? ("第 " + saved.num + " 章　" + (saved.title || "")) : (saved.title || "上次閱讀");
-          resumeEl.innerHTML = '<a href="' + saved.file + '#continue"><span class="resume-eyebrow">繼續閱讀</span>' +
-            '<span class="resume-title">' + label + "</span></a>";
+        if (saved && CH.test(saved.file)) {
+          var n = String(saved.num == null ? "" : saved.num).replace(/[^0-9]/g, "");
+          var a = document.createElement("a");
+          a.href = saved.file + "#continue";
+          var eb = document.createElement("span");
+          eb.className = "resume-eyebrow";
+          eb.textContent = "繼續閱讀";
+          var ti = document.createElement("span");
+          ti.className = "resume-title";
+          ti.textContent = n ? ("第 " + n + " 章　" + (saved.title || "")) : (saved.title || "上次閱讀");
+          a.appendChild(eb);
+          a.appendChild(ti);
+          resumeEl.appendChild(a);
           resumeEl.hidden = false;
         }
       } catch (e) { /* ignore */ }
@@ -275,7 +306,12 @@
         var doy = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
         var pick = flat[doy % flat.length];
         qEl.textContent = pick.text;
-        if (sEl) sEl.innerHTML = '<a href="' + pick.file + '">第 ' + pick.num + " 章　" + pick.title + "</a>";
+        if (sEl) {
+          var sa = document.createElement("a");
+          sa.href = pick.file;
+          sa.textContent = "第 " + pick.num + " 章　" + pick.title;
+          sEl.appendChild(sa);
+        }
       }
     }
   })();
