@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>靜心・觀呼吸｜關於淨念、靜心「觀」呼吸　淺說</title>
+  <meta name="description" content="《關於淨念、靜心「觀」呼吸》線上閱讀。以昊道老師的話，系統化呈現淨念、靜心、觀呼吸的內修心法——從一次觀呼吸練習，到捨識用根、自我止息。">
+  <meta name="author" content="昊道文化文教發展協會">
+  <link rel="canonical" href="https://haodao-culture.github.io/guan-huxi/">
+  <meta property="og:site_name" content="昊道文化文教發展協會">
+  <meta property="og:title" content="靜心・觀呼吸｜關於淨念、靜心「觀」呼吸　淺說">
+  <meta property="og:description" content="《關於淨念、靜心「觀」呼吸》線上閱讀。以昊道老師的話，系統化呈現淨念、靜心、觀呼吸的內修心法——從一次觀呼吸練習，到捨識用根、自我止息。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://haodao-culture.github.io/guan-huxi/">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#8b6f47">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="stylesheet" href="./breathing.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="reader-header">
+    <a class="brand" href="index.html">昊道文化<small>靜心・觀呼吸</small></a>
+    <a class="toc-link" href="https://www.haodao.org/">昊道官網</a>
+  </header>
+  <main class="reader wide">
+    <section class="cover">
+      <svg class="enso" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+        <circle cx="100" cy="100" r="82" />
+      </svg>
+      <div class="cover-inner">
+        <p class="eyebrow">昊道文化・以覺為師</p>
+        <h1 class="cover-title">靜心・觀呼吸</h1>
+        <p class="cover-sub">關於淨念、靜心「觀」呼吸　淺說</p>
+        <div class="rule"></div>
+        <div class="cover-lead">
+          <p>禪定是「心」入禪定，不是「身」入禪定，心定為主的，身定為輔。禪定是佛家禪宗用的說法。各家各有他的說法，只是不叫禪定而已。</p>
+          <p>那麼在靜下心來是禪定前的基本功夫。「淨」而後能「靜」，「靜」而後能「定」，所以靜心（自淨其意，虛其心、淨其意，制心一處等等）是基礎的練習，然後引導漸入「心定」，最後也不是一直停留在空無之定境，而是讓真人醒過來。</p>
+        </div>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#chapters">開始閱讀</a>
+          <a class="btn btn-ghost" href="#practice">進入練習</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="practice" aria-labelledby="practice-title">
+      <div class="feature-head">
+        <h2 id="practice-title">觀呼吸練習空間</h2>
+        <p class="feature-lead">找個安全安靜的時間坐下來，只是「觀」呼吸。計時器只是安靜的陪伴——不數息、不調節呼吸，讓身體自然呼吸。</p>
+      </div>
+      <div class="practice-layout">
+        <div class="timer-panel">
+          <div class="timer-ring" id="timerRing">
+            <div class="timer-core">
+              <span class="timer-time" id="timerTime">05:00</span>
+              <span class="timer-label" id="timerLabel">觀呼吸</span>
+            </div>
+          </div>
+          <div class="timer-presets" role="group" aria-label="選擇時長">
+            <button class="chip" type="button" data-min="3">3 分</button>
+            <button class="chip" type="button" data-min="5">5 分</button>
+            <button class="chip" type="button" data-min="10">10 分</button>
+          </div>
+          <div class="timer-controls">
+            <button class="btn btn-primary" type="button" id="timerToggle">開始</button>
+            <button class="btn btn-ghost" type="button" id="timerReset">重設</button>
+          </div>
+        </div>
+        <div class="practice-note">
+          <blockquote>不必數息，不用管呼吸的長短，快慢也不用管它，只是「觀」呼吸就可以。</blockquote>
+          <blockquote>當意識跑出來的時候，一覺察，收心回到「觀」呼吸。</blockquote>
+          <p class="src">—— 老師原文，摘自<a href="ch01.html">第 1 章〈一次觀呼吸練習〉</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" id="hundred-days" aria-labelledby="hundred-title">
+      <div class="feature-head">
+        <h2 id="hundred-title">百日基本功</h2>
+        <p class="feature-lead">「讓修煉的基本功能堅持一百天，越過這個門檻的養成，接下來的修煉才跟得上，煉得了。」每天坐一次，就打一格。</p>
+      </div>
+      <div class="tracker">
+        <div class="tracker-stats">
+          <div><strong id="dayCount">0</strong><span>累計天數</span></div>
+          <div><strong id="dayStreak">0</strong><span>連續天數</span></div>
+        </div>
+        <div class="hundred-grid" id="hundredGrid" role="img" aria-label="百日打卡進度格"></div>
+        <div class="tracker-controls">
+          <button class="btn btn-primary" type="button" id="markToday">完成一次・打卡</button>
+          <button class="btn-mini" type="button" id="trackerReset">清除紀錄</button>
+        </div>
+        <p class="tracker-note">紀錄只存在你目前使用的瀏覽器，不會上傳。</p>
+      </div>
+    </section>
+
+    <nav class="toc" id="chapters" aria-label="章節目錄">
+      <section class="toc-part">
+        <h2 class="part-title"><span class="part-label">第一部</span><span class="part-name">入門・怎麼觀呼吸</span></h2>
+        <ol class="chapter-cards">
+        <li><a class="chapter-card" href="ch01.html">
+          <span class="ch-num">第 1 章</span>
+          <span class="ch-title">一次觀呼吸練習</span>
+          <span class="ch-desc">「只有一念「觀」呼吸，沒有其他念頭。」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch02.html">
+          <span class="ch-num">第 2 章</span>
+          <span class="ch-title">除了這一念，別無他念</span>
+          <span class="ch-desc">「記住這句話：除了這一念，別無他念!」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch03.html">
+          <span class="ch-num">第 3 章</span>
+          <span class="ch-title">眼觀鼻：意識觀與覺性觀</span>
+          <span class="ch-desc">「是真心觀妄心，去觀自我，自我隱真我就顯。」</span>
+        </a></li>
+        </ol>
+      </section>
+      <section class="toc-part">
+        <h2 class="part-title"><span class="part-label">第二部</span><span class="part-name">日常・把「觀」活成常態</span></h2>
+        <ol class="chapter-cards">
+        <li><a class="chapter-card" href="ch04.html">
+          <span class="ch-num">第 4 章</span>
+          <span class="ch-title">行住坐臥皆可修</span>
+          <span class="ch-desc">「清醒、日常忙碌時，修煉觀呼吸，才能練出萬念聚於一念，收心清淨內心的真功夫。」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch05.html">
+          <span class="ch-num">第 5 章</span>
+          <span class="ch-title">收心、覺察與放鬆</span>
+          <span class="ch-desc">「不要急，放輕鬆，越急越遠。」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch06.html">
+          <span class="ch-num">第 6 章</span>
+          <span class="ch-title">內修心法</span>
+          <span class="ch-desc">「這是「定靜、降伏、出離」的基本功。」</span>
+        </a></li>
+        </ol>
+      </section>
+      <section class="toc-part">
+        <h2 class="part-title"><span class="part-label">第三部</span><span class="part-name">深修・以覺為師</span></h2>
+        <ol class="chapter-cards">
+        <li><a class="chapter-card" href="ch07.html">
+          <span class="ch-num">第 7 章</span>
+          <span class="ch-title">觀呼吸的心法修煉</span>
+          <span class="ch-desc">「於觀照之中，照見五蘊皆空，照見現象後的真相，了知真相後的實相、空相。」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch08.html">
+          <span class="ch-num">第 8 章</span>
+          <span class="ch-title">觀呼吸的一些效益</span>
+          <span class="ch-desc">「經過覺察、覺知、知止、收心的疊加心法的修煉，可以生出「不住心、無住心」，以及有「出離心」之狀態。」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch09.html">
+          <span class="ch-num">第 9 章</span>
+          <span class="ch-title">安定清靜，自我止息</span>
+          <span class="ch-desc">「觀呼吸的淨心、靜心，讓自我意識漸漸止息，而最後止息。」</span>
+        </a></li>
+        </ol>
+      </section>
+      <section class="toc-part">
+        <h2 class="part-title"><span class="part-label">第四部</span><span class="part-name">參・話頭與本性</span></h2>
+        <ol class="chapter-cards">
+        <li><a class="chapter-card" href="ch10.html">
+          <span class="ch-num">第 10 章</span>
+          <span class="ch-title">捨識用根、捨根聞性</span>
+          <span class="ch-desc">「捨識者是誰？」</span>
+        </a></li>
+        <li><a class="chapter-card" href="ch11.html">
+          <span class="ch-num">第 11 章</span>
+          <span class="ch-title">沒有存在感的存在</span>
+          <span class="ch-desc">「沒有存在感的存在，是什麼樣的存在？」</span>
+        </a></li>
+        </ol>
+      </section>
+    </nav>
+  </main>
+  <footer class="reader-footer">
+    <p>《關於淨念、靜心「觀」呼吸》　文／昊道</p>
+    <p><a href="https://www.haodao.org/">昊道文化文教發展協會</a>　·　<a href="./index.html">觀呼吸目錄</a></p>
+    <p class="copyright">© 2026 昊道文化文教發展協會</p>
+  </footer>
+  <script src="./breathing.js" defer></script>
+</body>
+</html>

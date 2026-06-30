@@ -1,0 +1,866 @@
+/* 靜心・觀呼吸 閱讀網站樣式
+   沿用 haodao 既有設計語言（米底褐字、Noto Serif TC 標題、寧靜留白） */
+
+:root {
+    --color-bg: #15140f;
+    --color-text: #e9e4d7;
+    --color-accent: #c9a86a;
+    --color-muted: #9c9484;
+    --color-divider: #33302a;
+    --color-card: #1d1b15;
+    --max-read: 40rem;
+    --max-wide: 60rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(1000px 620px at 50% -12%, rgba(201, 168, 106, 0.10), transparent 62%), var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.95;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+/* ---------- 頂部列 ---------- */
+.reader-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem clamp(1rem, 4vw, 2rem);
+    background: rgba(21, 20, 15, 0.84);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-divider);
+}
+
+.reader-header .brand {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--color-text);
+    font-size: 1.02rem;
+}
+
+.reader-header .brand small {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    color: var(--color-accent);
+    margin-top: 0.1rem;
+}
+
+.reader-header .toc-link {
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--color-divider);
+    border-radius: 2rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.reader-header .toc-link:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+/* ---------- 主容器 ---------- */
+.reader {
+    width: 100%;
+    max-width: var(--max-read);
+    margin: 0 auto;
+    padding: 2.5rem clamp(1.1rem, 5vw, 1.5rem) 3rem;
+    flex: 1;
+}
+
+.reader.wide {
+    max-width: var(--max-wide);
+}
+
+/* ---------- 著陸頁封面 ---------- */
+.cover {
+    text-align: center;
+    padding: 2.5rem 0 1rem;
+}
+
+.cover .eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.34em;
+    color: var(--color-accent);
+    padding-left: 0.34em;
+}
+
+.cover-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2.6rem, 9vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    padding-left: 0.18em;
+    margin: 1.2rem 0 0.6rem;
+}
+
+.cover-sub {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    letter-spacing: 0.16em;
+    color: var(--color-muted);
+}
+
+.rule {
+    width: 56px;
+    height: 1px;
+    background: var(--color-divider);
+    margin: 2.2rem auto;
+}
+
+.cover-lead {
+    max-width: 34rem;
+    margin: 0 auto;
+    text-align: left;
+    color: var(--color-text);
+}
+
+.cover-lead p {
+    margin-bottom: 1.1rem;
+}
+
+/* ---------- 目錄（部 / 章卡片） ---------- */
+.toc {
+    margin-top: 3rem;
+}
+
+.toc-part {
+    margin: 2.6rem 0;
+}
+
+.part-title {
+    font-family: 'Noto Serif TC', serif;
+    text-align: center;
+    margin-bottom: 1.4rem;
+}
+
+.part-title .part-label {
+    display: block;
+    font-size: 0.82rem;
+    letter-spacing: 0.4em;
+    color: var(--color-accent);
+    padding-left: 0.4em;
+    margin-bottom: 0.4rem;
+}
+
+.part-title .part-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--color-text);
+}
+
+.chapter-cards {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+}
+
+@media (min-width: 620px) {
+    .chapter-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.chapter-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    border: 1px solid var(--color-divider);
+    border-radius: 0.55rem;
+    background: var(--color-card);
+    padding: 1.2rem 1.3rem;
+    transition: all 0.25s ease;
+}
+
+.chapter-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+}
+
+.chapter-card .ch-num {
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    color: var(--color-accent);
+}
+
+.chapter-card .ch-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.22rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.chapter-card .ch-desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--color-muted);
+    margin-top: 0.15rem;
+}
+
+/* ---------- 篇章閱讀頁 ---------- */
+.progress {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    color: var(--color-accent);
+    margin-bottom: 1.4rem;
+}
+
+.chapter-head {
+    text-align: center;
+    margin-bottom: 2.6rem;
+}
+
+.chapter-head .eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.26em;
+    color: var(--color-accent);
+    padding-left: 0.26em;
+}
+
+.chapter-head h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    margin: 0.9rem 0 1.3rem;
+}
+
+.chapter-head .chapter-lead {
+    max-width: 30rem;
+    margin: 0 auto;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.chapter-head .rule {
+    margin: 1.6rem auto 0;
+}
+
+/* 內文 */
+.prose p {
+    margin: 0 0 1.5rem;
+    font-size: 1.06rem;
+    letter-spacing: 0.01em;
+    text-align: justify;
+}
+
+.prose .subhead {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin: 2.8rem 0 1.3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-divider);
+}
+
+.prose .subhead:first-child {
+    margin-top: 0;
+}
+
+/* 行內強調金句 */
+.prose blockquote.pull {
+    margin: 2rem 0;
+    padding: 0.3rem 0 0.3rem 1.3rem;
+    border-left: 3px solid var(--color-accent);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.85;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+}
+
+/* 署名 */
+.prose .sign {
+    text-align: right;
+    font-family: 'Noto Serif TC', serif;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-top: 2rem;
+}
+
+/* 內修心法卡片（定義式清單） */
+.method-list {
+    list-style: none;
+    display: grid;
+    gap: 0.8rem;
+    margin: 1.8rem 0 2rem;
+    counter-reset: method;
+}
+
+.method-list li {
+    position: relative;
+    border: 1px solid var(--color-divider);
+    border-radius: 0.5rem;
+    background: var(--color-card);
+    padding: 1.05rem 1.2rem 1.05rem 3.2rem;
+}
+
+.method-list li::before {
+    counter-increment: method;
+    content: counter(method, decimal-leading-zero);
+    position: absolute;
+    left: 1.1rem;
+    top: 1.05rem;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+}
+
+.method-list .term {
+    display: block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    margin-bottom: 0.2rem;
+}
+
+.method-list .desc {
+    font-size: 0.98rem;
+    color: var(--color-muted);
+}
+
+/* 話頭提問列表 */
+.koan {
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+    margin: 1.6rem 0 2rem;
+}
+
+.koan li {
+    padding: 0.55rem 0 0.55rem 1.4rem;
+    border-left: 2px solid var(--color-divider);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+/* 本章金句 */
+.golden {
+    margin: 3rem 0 1rem;
+    border: 1px solid var(--color-divider);
+    border-radius: 0.6rem;
+    background: rgba(201, 168, 106, 0.06);
+    padding: 1.8rem 1.6rem;
+}
+
+.golden h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-align: center;
+    color: var(--color-accent);
+    padding-left: 0.22em;
+    margin-bottom: 1.4rem;
+}
+
+.golden blockquote {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.18rem;
+    line-height: 1.85;
+    letter-spacing: 0.04em;
+    text-align: center;
+    color: var(--color-text);
+    margin: 1rem 0;
+}
+
+.golden blockquote + blockquote {
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-divider);
+}
+
+/* 上一章 / 目錄 / 下一章 */
+.chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.8rem;
+    align-items: stretch;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-divider);
+}
+
+.chapter-nav a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--color-divider);
+    border-radius: 0.5rem;
+    background: var(--color-card);
+    padding: 0.9rem 1.1rem;
+    transition: all 0.25s ease;
+}
+
+.chapter-nav a:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+
+.chapter-nav .nav-prev {
+    text-align: left;
+}
+
+.chapter-nav .nav-next {
+    text-align: right;
+}
+
+.chapter-nav .nav-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+}
+
+.chapter-nav .nav-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: 0.2rem;
+    line-height: 1.5;
+}
+
+.chapter-nav .nav-toc {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.16em;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    padding: 0.9rem 1rem;
+}
+
+.chapter-nav .nav-spacer {
+    border: none;
+    background: none;
+    box-shadow: none;
+    cursor: default;
+}
+
+.chapter-nav .nav-spacer:hover {
+    border: none;
+    box-shadow: none;
+}
+
+/* ---------- 頁尾 ---------- */
+.reader-footer {
+    text-align: center;
+    padding: 2.2rem 1.5rem;
+    border-top: 1px solid var(--color-divider);
+    color: var(--color-muted);
+    font-size: 0.85rem;
+}
+
+.reader-footer a {
+    color: var(--color-accent);
+}
+
+.reader-footer p {
+    margin: 0.35rem 0;
+}
+
+.reader-footer .copyright {
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+/* ---------- 手機 ---------- */
+@media (max-width: 480px) {
+    .reader {
+        padding: 1.8rem 1.1rem 2.4rem;
+    }
+    .prose p {
+        font-size: 1.02rem;
+        line-height: 1.9;
+    }
+    .chapter-nav {
+        grid-template-columns: 1fr;
+    }
+    .chapter-nav .nav-next {
+        text-align: left;
+    }
+    .chapter-nav .nav-toc {
+        order: 3;
+    }
+}
+
+/* ===================== 第一階段：練習夥伴 ===================== */
+
+/* ---------- 主視覺：圓相 ---------- */
+.cover {
+    position: relative;
+    overflow: hidden;
+}
+
+.enso {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -56%);
+    width: min(82vw, 480px);
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.enso circle {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    stroke-dasharray: 432 80;
+    transform: rotate(-48deg);
+    transform-origin: center;
+    opacity: 0.42;
+}
+
+.cover-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.2rem;
+}
+
+/* ---------- 按鈕 ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0.7rem 1.7rem;
+    border-radius: 2rem;
+    border: 1px solid var(--color-accent);
+    font: inherit;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: #15140f;
+}
+
+.btn-primary:hover {
+    background: #dcc089;
+    border-color: #dcc089;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-accent);
+}
+
+.btn-ghost:hover {
+    background: rgba(201, 168, 106, 0.12);
+}
+
+/* ---------- 功能區塊（練習 / 百日） ---------- */
+.feature {
+    margin: 4.5rem 0;
+    scroll-margin-top: 5rem;
+}
+
+.feature-head {
+    text-align: center;
+    max-width: 36rem;
+    margin: 0 auto 2.2rem;
+}
+
+.feature-head h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    margin-bottom: 0.8rem;
+}
+
+.feature-head .feature-lead {
+    color: var(--color-muted);
+    font-size: 0.98rem;
+}
+
+/* ---------- 觀呼吸計時器 ---------- */
+.practice-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.timer-panel,
+.practice-note {
+    border: 1px solid var(--color-divider);
+    border-radius: 0.6rem;
+    background: var(--color-card);
+    padding: 2rem;
+}
+
+.timer-panel {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 1.4rem;
+}
+
+.timer-ring {
+    width: min(244px, 64vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(var(--color-accent) var(--progress, 0%), rgba(201, 168, 106, 0.14) 0);
+    transition: background 0.5s linear;
+}
+
+.timer-core {
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #15140f;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    box-shadow: inset 0 0 44px rgba(0, 0, 0, 0.55);
+}
+
+.timer-time {
+    display: block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2.4rem, 7vw, 3.2rem);
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+}
+
+.timer-label {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+}
+
+.timer-presets,
+.timer-controls {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chip {
+    border: 1px solid var(--color-divider);
+    background: transparent;
+    color: var(--color-muted);
+    border-radius: 2rem;
+    padding: 0.45rem 1.05rem;
+    cursor: pointer;
+    font: inherit;
+    transition: all 0.2s ease;
+}
+
+.chip:hover,
+.chip.is-active {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.practice-note {
+    display: grid;
+    align-content: center;
+    gap: 1.1rem;
+}
+
+.practice-note blockquote {
+    margin: 0;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.12rem;
+    line-height: 1.95;
+    color: var(--color-text);
+}
+
+.practice-note blockquote + blockquote {
+    margin-top: 0.2rem;
+}
+
+.practice-note .src {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+}
+
+.practice-note .src a {
+    color: var(--color-accent);
+}
+
+/* ---------- 百日基本功 tracker ---------- */
+.tracker {
+    display: grid;
+    justify-items: center;
+    gap: 1.6rem;
+}
+
+.tracker-stats {
+    display: flex;
+    gap: 2.6rem;
+}
+
+.tracker-stats div {
+    text-align: center;
+}
+
+.tracker-stats strong {
+    display: block;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--color-accent);
+}
+
+.tracker-stats span {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+}
+
+.hundred-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    width: min(100%, 430px);
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-divider);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.6rem;
+    color: transparent;
+    transition: all 0.25s ease;
+}
+
+.day-cell.done {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #15140f;
+}
+
+.tracker-controls {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-mini {
+    border: 1px solid var(--color-divider);
+    background: transparent;
+    color: var(--color-muted);
+    border-radius: 2rem;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    font: inherit;
+    transition: all 0.2s ease;
+}
+
+.btn-mini:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+#markToday.is-done {
+    background: transparent;
+    color: var(--color-accent);
+}
+
+.pulse {
+    animation: pulse 1.1s ease 2;
+}
+
+@keyframes pulse {
+    50% {
+        box-shadow: 0 0 0 7px rgba(201, 168, 106, 0.28);
+    }
+}
+
+.tracker-note {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    .practice-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .tracker-stats {
+        gap: 1.8rem;
+    }
+    .hero-ctas .btn {
+        width: 100%;
+    }
+}
