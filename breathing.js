@@ -183,4 +183,100 @@
 
     render();
   })();
+
+  /* ---------------- 章節頁：閱讀進度條 + 接續閱讀 ---------------- */
+  (function initChapter() {
+    var main = document.querySelector("main.chapter");
+    if (!main) return;
+
+    var KEY = "guanxi-last-read";
+    var file = location.pathname.split("/").pop() || "index.html";
+    var h1 = document.querySelector(".chapter-head h1");
+    var title = h1 ? h1.textContent.trim() : document.title;
+    var progEl = document.querySelector(".progress");
+    var num = progEl ? (progEl.textContent.match(/第\s*(\d+)\s*章/) || [])[1] : "";
+
+    // 進度條
+    var bar = document.createElement("div");
+    bar.className = "read-progress";
+    bar.innerHTML = "<span></span>";
+    document.body.insertBefore(bar, document.body.firstChild);
+    var fill = bar.firstChild;
+
+    function docHeight() {
+      return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+    }
+    function onScroll() {
+      var h = docHeight();
+      var pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0;
+      fill.style.width = pct + "%";
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+
+    // 記住閱讀位置（節流）
+    var lastSave = 0;
+    function save() {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ file: file, num: num, title: title, scroll: Math.round(window.scrollY) }));
+      } catch (e) { /* 隱私模式容錯 */ }
+    }
+    window.addEventListener("scroll", function () {
+      var t = Date.now();
+      if (t - lastSave > 800) { lastSave = t; save(); }
+    }, { passive: true });
+    window.addEventListener("pagehide", save);
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") save();
+    });
+
+    // 從目錄「繼續閱讀」進來時，捲回上次位置
+    if (location.hash === "#continue") {
+      try {
+        var saved = JSON.parse(localStorage.getItem(KEY));
+        if (saved && saved.file === file && saved.scroll) {
+          requestAnimationFrame(function () { window.scrollTo(0, saved.scroll); });
+        }
+      } catch (e) { /* ignore */ }
+    }
+  })();
+
+  /* ---------------- 著陸頁：接續閱讀 + 每日一句 ---------------- */
+  (function initLanding() {
+    var KEY = "guanxi-last-read";
+
+    // 接續閱讀
+    var resumeEl = document.getElementById("resumeReading");
+    if (resumeEl) {
+      try {
+        var saved = JSON.parse(localStorage.getItem(KEY));
+        if (saved && saved.file) {
+          var label = saved.num ? ("第 " + saved.num + " 章　" + (saved.title || "")) : (saved.title || "上次閱讀");
+          resumeEl.innerHTML = '<a href="' + saved.file + '#continue"><span class="resume-eyebrow">繼續閱讀</span>' +
+            '<span class="resume-title">' + label + "</span></a>";
+          resumeEl.hidden = false;
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    // 每日一句
+    var qEl = document.getElementById("dailyQuote");
+    var sEl = document.getElementById("dailySrc");
+    if (qEl && window.GUANXI_QUOTES) {
+      var flat = [];
+      window.GUANXI_QUOTES.forEach(function (c) {
+        (c.quotes || []).forEach(function (q) {
+          flat.push({ text: q, file: c.file, num: c.num, title: c.title });
+        });
+      });
+      if (flat.length) {
+        var now = new Date();
+        var doy = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+        var pick = flat[doy % flat.length];
+        qEl.textContent = pick.text;
+        if (sEl) sEl.innerHTML = '<a href="' + pick.file + '">第 ' + pick.num + " 章　" + pick.title + "</a>";
+      }
+    }
+  })();
 })();
