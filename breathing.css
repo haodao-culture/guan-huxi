@@ -2,12 +2,12 @@
    沿用 haodao 既有設計語言（米底褐字、Noto Serif TC 標題、寧靜留白） */
 
 :root {
-    --color-bg: #15140f;
-    --color-text: #e9e4d7;
-    --color-accent: #c9a86a;
-    --color-muted: #9c9484;
-    --color-divider: #33302a;
-    --color-card: #1d1b15;
+    --color-bg: #211e17;
+    --color-text: #f0ece1;
+    --color-accent: #d6b876;
+    --color-muted: #aaa392;
+    --color-divider: #3c382e;
+    --color-card: #2a2620;
     --max-read: 40rem;
     --max-wide: 60rem;
 }
@@ -24,7 +24,7 @@ html {
 
 body {
     font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: radial-gradient(1000px 620px at 50% -12%, rgba(201, 168, 106, 0.10), transparent 62%), var(--color-bg);
+    background: radial-gradient(1100px 680px at 50% -12%, rgba(214, 184, 118, 0.14), transparent 60%), var(--color-bg);
     color: var(--color-text);
     line-height: 1.95;
     min-height: 100vh;
@@ -48,7 +48,7 @@ a {
     justify-content: space-between;
     gap: 1rem;
     padding: 0.85rem clamp(1rem, 4vw, 2rem);
-    background: rgba(21, 20, 15, 0.84);
+    background: rgba(33, 30, 23, 0.86);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-divider);
@@ -385,7 +385,7 @@ a {
     margin: 3rem 0 1rem;
     border: 1px solid var(--color-divider);
     border-radius: 0.6rem;
-    background: rgba(201, 168, 106, 0.06);
+    background: rgba(214, 184, 118, 0.06);
     padding: 1.8rem 1.6rem;
 }
 
@@ -590,12 +590,12 @@ a {
 
 .btn-primary {
     background: var(--color-accent);
-    color: #15140f;
+    color: #1b1813;
 }
 
 .btn-primary:hover {
-    background: #dcc089;
-    border-color: #dcc089;
+    background: #e6c98d;
+    border-color: #e6c98d;
 }
 
 .btn-ghost {
@@ -604,7 +604,7 @@ a {
 }
 
 .btn-ghost:hover {
-    background: rgba(201, 168, 106, 0.12);
+    background: rgba(214, 184, 118, 0.12);
 }
 
 /* ---------- 功能區塊（練習 / 百日） ---------- */
@@ -662,7 +662,7 @@ a {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: conic-gradient(var(--color-accent) var(--progress, 0%), rgba(201, 168, 106, 0.14) 0);
+    background: conic-gradient(var(--color-accent) var(--progress, 0%), rgba(214, 184, 118, 0.14) 0);
     transition: background 0.5s linear;
 }
 
@@ -670,7 +670,7 @@ a {
     width: 80%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: #15140f;
+    background: #1b1813;
     display: grid;
     place-items: center;
     text-align: center;
@@ -802,7 +802,7 @@ a {
 .day-cell.done {
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: #15140f;
+    color: #1b1813;
 }
 
 .tracker-controls {
@@ -840,7 +840,7 @@ a {
 
 @keyframes pulse {
     50% {
-        box-shadow: 0 0 0 7px rgba(201, 168, 106, 0.28);
+        box-shadow: 0 0 0 7px rgba(214, 184, 118, 0.28);
     }
 }
 
